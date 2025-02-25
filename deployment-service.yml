@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: bloggingapp
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: java-container
-          image: 774305587583.dkr.ecr.ap-south-1.amazonaws.com/java-image/mohit:${BUILD_NUMBER} # Updated image to private DockerHub image
+          image: 774305587583.dkr.ecr.ap-south-1.amazonaws.com/java-image:latest # Updated image to private DockerHub image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
