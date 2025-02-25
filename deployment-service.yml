@@ -13,13 +13,13 @@ spec:
         app: bloggingapp
     spec:
       containers:
-        - name: bloggingapp
-          image: adijaiswal/bloggingapp:latest # Updated image to private DockerHub image
+        - name: java-container
+          image: 774305587583.dkr.ecr.ap-south-1.amazonaws.com/java-image/mohit:${BUILD_NUMBER} # Updated image to private DockerHub image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
       imagePullSecrets:
-        - name: regcred # Reference to the Docker registry secret
+        - name: ecr-secret # Reference to the Docker registry secret
 ---
 apiVersion: v1
 kind: Service
