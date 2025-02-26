@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bloggingapp-deployment
+  name: bloggingapp-deployment-test
 spec:
   selector:
     matchLabels:
-      app: bloggingapp
+      app: bloggingapp-test
   replicas: 3
   template:
     metadata:
       labels:
-        app: bloggingapp
+        app: bloggingapp-test
     spec:
       containers:
-        - name: java-container
+        - name: java-container-test
           image: 774305587583.dkr.ecr.ap-south-1.amazonaws.com/java-image:latest # Updated image to private DockerHub image
           imagePullPolicy: Always
           ports:
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bloggingapp-ssvc
+  name: bloggingapp-svc-test
 spec:
   selector:
-    app: bloggingapp
+    app: bloggingapp-test
   ports:
     - protocol: "TCP"
       port: 80
