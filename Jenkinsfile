@@ -62,7 +62,7 @@ pipeline {
 
         stage('Trivy FS Scan') {
             steps {
-                sh "trivy fs --format table -o fs.txt ."
+                sh '''trivy fs --format table -o fs-dev-$(date +%Y-%m-%d-%H-%M-%S).txt .'''
             }
         }
         
@@ -92,7 +92,10 @@ pipeline {
 
         stage('Image Scan') {
             steps {
-                sh "trivy image --format table -o dev-image.txt ${ECR_REPO_URL}/${IMAGE_TAG}"
+                script {
+                    def currentDate = sh(script: "date +%Y-%m-%d-%H-%M-%S", returnStdout: true).trim()
+                    sh "trivy image --format table -o dev-image-report-${currentDate}.txt ${ECR_REPO_URL}/${IMAGE_TAG}"
+                }
             }
         }
 
