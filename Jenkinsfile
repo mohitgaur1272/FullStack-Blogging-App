@@ -62,7 +62,7 @@ pipeline {
 
         stage('Trivy FS Scan') {
             steps {
-                sh '''trivy fs --format table -o fs-main-$(date +%Y-%m-%d).txt .'''
+                sh '''trivy fs --format table -o fs-main-$(date +%Y-%m-%d-%H-%M-%S).txt .'''
             }
         }
         
