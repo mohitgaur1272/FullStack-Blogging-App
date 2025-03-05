@@ -92,11 +92,7 @@ pipeline {
 
         stage('Image Scan') {
             steps {
-                script{
-                    def currentDate = sh(script: "date +%Y-%m-%d", returnStdout: true).trim()
-                    sh "trivy image --format table -o main-image-report-${currentDate}.txt ${ECR_REPO_URL}/${IMAGE_TAG}"
-                    //sh '''trivy image --format table -o main-image-report-$(date +%Y-%m-%d).txt '''
-                }
+                sh '''trivy image --format table -o main-image-report-$(date +%Y-%m-%d).txt ${ECR_REPO_URL}/${IMAGE_TAG}'''
             }
         }
 
