@@ -85,14 +85,14 @@ pipeline {
                 script {
                     def dockerImage = "${ECR_REPO_URL}/${IMAGE_TAG}"
                     sh "docker build -t ${dockerImage} ."
-                    //sh "docker tag ${dockerImage} ${ECR_REPO_URL}/${IMAGE_TAG}"
+                    sh "docker tag ${dockerImage} ${ECR_REPO_URL}/${IMAGE_TAG}"
                 }
             }
         }
 
         stage('Image Scan') {
             steps {
-                sh "trivy image --format table -o dev-image.txt ${dockerImage}"
+                sh "trivy image --format table -o dev-image.txt ${ECR_REPO_URL}/${IMAGE_TAG}"
             }
         }
 
