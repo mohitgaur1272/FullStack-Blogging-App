@@ -62,7 +62,7 @@ pipeline {
 
         stage('Trivy FS Scan') {
             steps {
-                sh "trivy fs --format table -o fs.txt ."
+                sh "trivy fs --format table -o fs-main-$(DATE).txt ."
             }
         }
         
@@ -92,7 +92,7 @@ pipeline {
 
         stage('Image Scan') {
             steps {
-                sh "trivy image --format table -o image.txt ${ECR_REPO_URL}/${IMAGE_TAG}"
+                sh "trivy image --format table -o mainimage-report-$(DATE).txt ${ECR_REPO_URL}/${IMAGE_TAG}"
             }
         }
 
